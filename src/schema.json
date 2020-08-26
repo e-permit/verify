@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": ["ES256"]
+        },
+        "kid": {
+          "type": "string"
+        }
+      },
+      "required": ["alg", "kid"]
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "iss": {
+          "type": "string"
+        },
+        "aud": {
+          "type": "string"
+        },
+        "sub": {
+          "type": "string"
+        },
+        "exp": {
+          "type": "number"
+        },
+        "iat": {
+          "type": "number"
+        },
+        "ct": {
+          "type": "string",
+          "enum": ["biliteral", "transit", "3rdcountry"]
+        },
+        "cid": {
+          "type": "string"
+        },
+        "cy": {
+          "type": "string",
+          "pattern": "^\\d{4}$"
+        },
+        "oid": {
+          "type": "string"
+        },
+        "on": {
+          "type": "string"
+        },
+        "res": {
+          "type": "string"
+        }
+      },
+      "required": ["iss", "aud", "sub", "exp", "iat", "ct", "cid", "cy", "oid"]
+    },
+    "sig": {
+      "type": "string"
+    }
+  },
+  "required": ["header", "payload", "sig"]
+}
