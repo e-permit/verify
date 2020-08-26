@@ -47,7 +47,6 @@ export default function Scan() {
   const [pageState, setPageState] = useState({ page: "scan", data: "" });
   async function handleScan(data) {
     if (data) {
-      alert(data);
      setPageState({ page: "result", data: data });
     }
   }
@@ -89,9 +88,9 @@ export default function Scan() {
               aria-label="add"
               className={classes.fabButton}
               onClick={() => {
-                const cred = "1:ES256:1:tr:ua:06BB2545:1600905600:1608768000:A1425687426242555:biliteral:2020:A1425687426242555:AKANLAR ULUSLAR ARASI TASIMACILIK LIMITED SIRKETI::3N8VWIJ0xrSbKvxzzU8HMaD7WhAV5kZNe5eDdk-RSbkJEY0fI9fypQM0A7b7jkOSv3EiNsehPnXdUKK8MDcAVQ";
-                setPageState({ page: "result", data: cred });
-                //setPageState({ page: "scan", data: "" });
+                //const cred = "11¬¹¥òÒk4ãg-Í0µwµÈg³k¿TegÙ­=Ú£Àßö£[>$ÂhÀçÇÀÙ®ôìåi2'DCÃ¤ trua16009056001608768000123456789012020:06BB2545:A1425687426242555:AKANLAR ULUSLAR ARASI TASIMACILIK LIMITED SIRKETI:";
+                //setPageState({ page: "result", data: cred });
+                setPageState({ page: "scan", data: "" });
               }}
             >
               <CropFreeIcon />

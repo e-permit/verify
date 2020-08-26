@@ -27,10 +27,10 @@
           "type": "string"
         },
         "exp": {
-          "type": "number"
+          "type": "string"
         },
         "iat": {
-          "type": "number"
+          "type": "string"
         },
         "ct": {
           "type": "string",

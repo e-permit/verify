@@ -16,7 +16,7 @@ const authorities = [
   {
     id: "tr",
     uri: "/verify/tr.json",
-    title: "Republic of Turkey"
+    title: "Türkiye"
   },
   {
     id: "ua",

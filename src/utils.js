@@ -6,12 +6,10 @@ const base64url = require("base64-url");
 const ajv = new Ajv();
 export async function getCredential(encodedCred, authority, revocations) {
   const cred = decodeCred(encodedCred);
-  console.log(JSON.stringify(cred.payload));
-  console.log(JSON.stringify(cred.header));
   var validate = ajv.compile(schema);
   var valid = validate(cred);
   if (!valid) {
-    console.log(validate.errors);
+    alert(JSON.stringify(validate.errors));
     return { isValid: false, errorCode: "invalid_cred" };
   }
   if (
@@ -34,11 +32,10 @@ export async function getCredential(encodedCred, authority, revocations) {
   const pubKey = rs.KEYUTIL.getKey(publicJwk);
   const headerBase64 = base64url.encode(JSON.stringify(cred.header));
   const payloadBase64 = base64url.encode(JSON.stringify(cred.payload));
-  const sigBase64 = cred.sig;
+  const sigBase64 = base64url.encode(cred.sig, "binary");
   const sJws = `${headerBase64}.${payloadBase64}.${sigBase64}`;
   const isValid = rs.KJUR.jws.JWS.verify(sJws, pubKey, [cred.header.alg]);
   if (!isValid) {
-    console.log(sJws);
     return { isValid: false, errorCode: "invalid_signature" };
   }
   if (revocations.some((x) => x.cred_id === cred.payload.cred_id)) {
@@ -77,27 +74,32 @@ function convertPayload(payload, authority) {
 }
 
 export function decodeCred(credStr) {
-  const decoded = credStr.split(":");
-  const cred = {};
-  cred.header = {};
-  cred.payload = {};
-  cred.header.alg = decoded[1];
-  cred.header.kid = decoded[2];
-  cred.payload.iss = decoded[3];
-  cred.payload.aud = decoded[4];
-  cred.payload.sub = decoded[5];
-  cred.payload.iat = decoded[6];
-  cred.payload.exp = decoded[7];
-  cred.payload.cid = decoded[8];
-  cred.payload.ct = decoded[9];
-  cred.payload.cy = decoded[10];
-  cred.payload.oid = decoded[11];
-  if (decoded[12]) {
-    cred.payload.on = decoded[12];
+  
+  //const version = credStr.substring(0, 1);
+  const cred = { header: {}, payload: {} };
+  cred.header.alg = "ES256";
+  cred.header.kid = credStr.substring(1, 2);
+  cred.sig = credStr.substring(2, 66);
+  cred.payload.iss = credStr.substring(66, 68);
+  cred.payload.aud = credStr.substring(68, 70);
+  cred.payload.iat = credStr.substring(70, 80);
+  cred.payload.exp = credStr.substring(80, 90);
+  cred.payload.cid = credStr.substring(90, 100);
+  const ct = credStr.substring(100, 101);
+  if (ct === "1") cred.payload.ct = "biliteral";
+  else if (ct === "2") cred.payload.ct = "transit";
+  else if (ct === "3") cred.payload.ct = "3rdcountry";
+  cred.payload.cy = credStr.substring(101, 105);
+  const decoded = credStr.substring(105).split(":");
+  cred.payload.sub = decoded[0];
+  cred.payload.oid = decoded[1];
+  if (decoded[2]) {
+    cred.payload.on = decoded[2];
   }
-  if (decoded[13]) {
-    cred.payload.res = decoded[13];
+  if (decoded[3]) {
+    cred.payload.res = decoded[3];
   }
-  cred.sig = decoded[14];
   return cred;
 }
+
+
