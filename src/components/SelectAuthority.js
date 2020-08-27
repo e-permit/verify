@@ -1,6 +1,6 @@
 //import DirectionsBusIcon from "@material-ui/icons/DirectionsBus";
 //import CropFreeIcon from "@material-ui/icons/CropFree";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -12,18 +12,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Avatar from "@material-ui/core/Avatar";
 import { AppContext } from "../context";
 
-const authorities = [
-  {
-    id: "tr",
-    uri: "/verify/tr.json",
-    title: "Türkiye"
-  },
-  {
-    id: "ua",
-    uri: "/verify/ua.json",
-    title: "Ukraine"
-  }
-];
+const URL = process.env.AUTHORITIES_URL || "https://e-permit.github.io/demo/authorities.json";
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -45,7 +34,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectAuthority() {
   const classes = useStyles();
+  const [authorities, setAuthorities] = useState([]);
   const { dispatch } = React.useContext(AppContext);
+
+  useEffect(() => {
+    async function fetchAuthorities() {
+      const res = await fetch(URL);
+      const result = await res.json();
+      setAuthorities(result.authorities);
+    }
+    fetchAuthorities();
+  }, [])
   return (
     <Paper square className={classes.paper}>
       <Typography className={classes.text} variant="h5" gutterBottom>

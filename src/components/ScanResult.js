@@ -14,6 +14,7 @@ export default function ScanResult(props) {
           props.authority,
           props.revocations
         );
+        console.log(result);
         setState(result);
       }
       catch (error) {

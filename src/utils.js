@@ -2,9 +2,77 @@ import Ajv from "ajv";
 import * as schema from "./schema.json";
 const rs = require("jsrsasign");
 const base64url = require("base64-url");
-
 const ajv = new Ajv();
-export async function getCredential(encodedCred, authority, revocations) {
+function convertPayload(payload, authority) {
+  const iatDate = new Date(payload.iat * 1000).toLocaleDateString();
+  const expDate = new Date(payload.exp * 1000).toLocaleDateString();
+  const issuer = authority.authorities.find((x) => x.id === payload.iss);
+  const verifier = authority.authorities.find((x) => x.id === payload.aud);
+  const c = {
+    iatDate,
+    expDate,
+    issuer_code: issuer.id,
+    issuer_name: issuer.title,
+    verifier_code: verifier.id,
+    verifier_name: verifier.title,
+    sub: payload.sub,
+    cred_id: payload.cid,
+    cred_type: authority.titles["ct_" + payload.ct],
+    cred_year: payload.cy,
+    org_id: payload.oid
+  };
+  if (payload.on) {
+    c.org_name = payload.on;
+  }
+  if (payload.res) {
+    c.restrictions = payload.res;
+  }
+
+  return c;
+}
+
+export async function getCredential(cred, authority, revocations) {
+  const arr = cred.split(".");
+  const version = arr[0];
+  if (version === "v1") {
+    const jws = arr[1] + "." + arr[2] + "." + arr[3];
+    const header = JSON.parse(base64url.decode(arr[1]));
+    const payload = JSON.parse(base64url.decode(arr[2]));
+    const validate = ajv.compile(schema);
+    const valid = validate({ header: header, payload: payload, sig: arr[3] });
+    if (!valid) {
+      alert(JSON.stringify(validate.errors));
+      return { isValid: false, errorCode: "invalid_cred" };
+    }
+    if (!(payload.aud === authority.id || payload.iss === authority.id)) {
+      return { isValid: false, errorCode: "invalid_aud" };
+    }
+    const clockTimestamp = Math.floor(Date.now() / 1000);
+    if (clockTimestamp >= payload.exp) {
+      return { isValid: false, errorCode: "invalid_exp" };
+    }
+    const issuer = authority.authorities.find((x) => x.id === payload.iss);
+    if (!issuer || Object.keys(issuer).length === 0) {
+      return { isValid: false, errorCode: "iss_notfound" };
+    }
+    const publicJwk = issuer.keys.find((x) => x.kid === header.kid);
+    if (!publicJwk || Object.keys(publicJwk).length === 0) {
+      return { isValid: false, errorCode: "jwk_notfound" };
+    }
+    const pubKey = rs.KEYUTIL.getKey(publicJwk);
+    const isValid = rs.KJUR.jws.JWS.verify(jws, pubKey, [header.alg]);
+    if (!isValid) {
+      return { isValid: false, errorCode: "invalid_signature" };
+    }
+    if (revocations.some((x) => x.cid === payload.cid)) {
+      return { isValid: false, errorCode: "revoked_cred" };
+    }
+    const convertedCred = convertPayload(payload, authority);
+    return { isValid: true, cred: convertedCred };
+  }
+  throw Error("Version is not supported");
+}
+/*export async function getCredential(encodedCred, authority, revocations) {
   const cred = decodeCred(encodedCred);
   var validate = ajv.compile(schema);
   var valid = validate(cred);
@@ -45,37 +113,8 @@ export async function getCredential(encodedCred, authority, revocations) {
   return { isValid: true, cred: convertedCred };
 }
 
-function convertPayload(payload, authority) {
-  const iatDate = new Date(payload.iat * 1000).toLocaleDateString();
-  const expDate = new Date(payload.exp * 1000).toLocaleDateString();
-  const issuer = authority.authorities.find((x) => x.id === payload.iss);
-  const verifier = authority.authorities.find((x) => x.id === payload.aud);
-  const c = {
-    iatDate,
-    expDate,
-    issuer_code: issuer.id,
-    issuer_name: issuer.title,
-    verifier_code: verifier.id,
-    verifier_name: verifier.title,
-    sub: payload.sub,
-    cred_id: payload.cid,
-    cred_type: authority.titles["ct_" + payload.ct],
-    cred_year: payload.cy,
-    org_id: payload.oid
-  };
-  if (payload.on) {
-    c.org_name = payload.on;
-  }
-  if (payload.res) {
-    c.restrictions = payload.res;
-  }
-
-  return c;
-}
 
 export function decodeCred(credStr) {
-  
-  //const version = credStr.substring(0, 1);
   const cred = { header: {}, payload: {} };
   cred.header.alg = "ES256";
   cred.header.kid = credStr.substring(1, 2);
@@ -85,10 +124,7 @@ export function decodeCred(credStr) {
   cred.payload.iat = credStr.substring(70, 80);
   cred.payload.exp = credStr.substring(80, 90);
   cred.payload.cid = credStr.substring(90, 100);
-  const ct = credStr.substring(100, 101);
-  if (ct === "1") cred.payload.ct = "biliteral";
-  else if (ct === "2") cred.payload.ct = "transit";
-  else if (ct === "3") cred.payload.ct = "3rdcountry";
+  cred.payload.ct = credStr.substring(100, 101);
   cred.payload.cy = credStr.substring(101, 105);
   const decoded = credStr.substring(105).split(":");
   cred.payload.sub = decoded[0];
@@ -100,6 +136,6 @@ export function decodeCred(credStr) {
     cred.payload.res = decoded[3];
   }
   return cred;
-}
+}*/
 
 

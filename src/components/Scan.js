@@ -45,9 +45,10 @@ export default function Scan() {
   const classes = useStyles();
   const { state } = React.useContext(AppContext);
   const [pageState, setPageState] = useState({ page: "scan", data: "" });
+  //const [pageState, setPageState] = useState({ page: "result", data: "v1.eyJhbGciOiJFUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJ0ciIsImF1ZCI6InVhIiwiaWF0IjoiMTYwMDkwNTYwMCIsImV4cCI6IjE2MDg3NjgwMDAiLCJjaWQiOiIxMjM0NTY3ODkwIiwiY3QiOiIxIiwiY3kiOiIyMDIwIiwic3ViIjoiMDZCQjI1NDUiLCJvaWQiOiJBMTQyNTY4NzQyNjI0MjU1NSIsIm9uIjoiQUtBTkxBUiBVTFVTTEFSIEFSQVNJIFRBU0lNQUNJTElLIExJTUlURUQgU0lSS0VUSSJ9.KGfbd5i-AEmfTyKtLj4Bbw0gl9-82cC51QY-pIubUaiti3r6pzCLRJLNzrQX0va4fMfTtPEnACVq42iJnrcCAQ" });
   async function handleScan(data) {
     if (data) {
-     setPageState({ page: "result", data: data });
+      setPageState({ page: "result", data: data });
     }
   }
   function handleError(err) {
@@ -64,13 +65,13 @@ export default function Scan() {
             revocations={state.revocations}
           />
         ) : (
-          <QrReader
-            delay={300}
-            onError={handleError}
-            onScan={handleScan}
-            style={{ width: "100%" }}
-          />
-        )}
+            <QrReader
+              delay={300}
+              onError={handleError}
+              onScan={handleScan}
+              style={{ width: "100%" }}
+            />
+          )}
       </Paper>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
@@ -88,8 +89,6 @@ export default function Scan() {
               aria-label="add"
               className={classes.fabButton}
               onClick={() => {
-                //const cred = "11¬¹¥òÒk4ãg-Í0µwµÈg³k¿TegÙ­=Ú£Àßö£[>$ÂhÀçÇÀÙ®ôìåi2'DCÃ¤ trua16009056001608768000123456789012020:06BB2545:A1425687426242555:AKANLAR ULUSLAR ARASI TASIMACILIK LIMITED SIRKETI:";
-                //setPageState({ page: "result", data: cred });
                 setPageState({ page: "scan", data: "" });
               }}
             >

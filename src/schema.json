@@ -34,7 +34,7 @@
         },
         "ct": {
           "type": "string",
-          "enum": ["biliteral", "transit", "3rdcountry"]
+          "enum": ["1", "2", "3"]
         },
         "cid": {
           "type": "string"
