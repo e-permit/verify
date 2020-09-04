@@ -22,13 +22,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CredentialView(props) {
   const classes = useStyles();
+  const  locale = props.locale;
+  const {
+    exp,
+    iat,
+    iss,
+    aud,
+    sub,
+    cid,
+    ct,
+    cy,
+    comid,
+    comn,
+    res
+  } = props.cred;
+  const iatDate = new Date(iat * 1000).toLocaleDateString();
+  const expDate = new Date(exp * 1000).toLocaleDateString();
   return (
     <List className={classes.root}>
       <ListItem>
         <ListItemText
           primary={
             <Alert severity="success">
-              {props.authority.titles.valid_signature_message}
+              {locale.valid_signature_message}
             </Alert>
           }
         />
@@ -36,17 +52,17 @@ export default function CredentialView(props) {
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.iss}
+          primary={locale.iss_label}
           secondary={
             <div className={classes.root}>
               <Grid container alignItems="center" spacing={3}>
                 <Grid item>
                   <img
                     alt="Flag"
-                    src={`https://www.countryflags.io/${props.cred.issuer_code}/flat/32.png`}
+                    src={`https://www.countryflags.io/${iss}/flat/32.png`}
                   />
                 </Grid>
-                <Grid item>{props.cred.issuer_name}</Grid>
+                <Grid item>{locale["authority_name_" + iss]}</Grid>
               </Grid>
             </div>
           }
@@ -55,17 +71,17 @@ export default function CredentialView(props) {
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.aud}
+          primary={locale.aud_label}
           secondary={
             <div className={classes.root}>
               <Grid container alignItems="center" spacing={3}>
                 <Grid item>
                   <img
                     alt="Flag"
-                    src={`https://www.countryflags.io/${props.cred.verifier_code}/flat/32.png`}
+                    src={`https://www.countryflags.io/${aud}/flat/32.png`}
                   />
                 </Grid>
-                <Grid item>{props.cred.verifier_name}</Grid>
+                <Grid item>{locale["authority_name_" + aud]}</Grid>
               </Grid>
             </div>
           }
@@ -74,76 +90,76 @@ export default function CredentialView(props) {
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.iat}
-          secondary={<div className={classes.root}>{props.cred.iatDate}</div>}
+          primary={locale.iat_label}
+          secondary={<div className={classes.root}>{iatDate}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.exp}
-          secondary={<div className={classes.root}>{props.cred.expDate}</div>}
+          primary={locale.exp_label}
+          secondary={<div className={classes.root}>{expDate}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.sub}
-          secondary={<div className={classes.root}>{props.cred.sub}</div>}
+          primary={locale.sub_label}
+          secondary={<div className={classes.root}>{sub}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.ct}
-          secondary={<div className={classes.root}>{props.cred.cred_type}</div>}
+          primary={locale.ct_label}
+          secondary={<div className={classes.root}>{locale["ct_" + ct + "_text"]}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.cy}
-          secondary={<div className={classes.root}>{props.cred.cred_year}</div>}
+          primary={locale.cy_label}
+          secondary={<div className={classes.root}>{cy}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.cid}
-          secondary={<div className={classes.root}>{props.cred.cred_id}</div>}
+          primary={locale.cid_label}
+          secondary={<div className={classes.root}>{cid}</div>}
         />
       </ListItem>
       <Divider component="li" />
       <ListItem>
         <ListItemText
-          primary={props.authority.titles.oid}
-          secondary={<div className={classes.root}>{props.cred.org_id}</div>}
+          primary={locale.comid_label}
+          secondary={<div className={classes.root}>{comid}</div>}
         />
       </ListItem>
 
-      {props.cred.org_name && (
+      {comn && (
         <React.Fragment>
           {" "}
           <Divider component="li" />
           <ListItem>
             <ListItemText
-              primary={props.authority.titles.on}
+              primary={locale.comn_label}
               secondary={
-                <div className={classes.root}>{props.cred.org_name}</div>
+                <div className={classes.root}>{comn}</div>
               }
             />
           </ListItem>
         </React.Fragment>
       )}
-      {props.cred.restrictions && (
+      {res && (
         <React.Fragment>
           {" "}
           <Divider component="li" />
           <ListItem>
             <ListItemText
-              primary={props.authority.titles.res}
+              primary={locale.res_label}
               secondary={
-                <div className={classes.root}>{props.cred.restrictions}</div>
+                <div className={classes.root}>{res}</div>
               }
             />
           </ListItem>

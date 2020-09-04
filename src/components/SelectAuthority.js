@@ -61,10 +61,10 @@ export default function SelectAuthority() {
               onClick={async () => {
                 if (uri) {
                   const res = await fetch(uri);
-                  let authority = await res.json();
+                  let config = await res.json();
                   dispatch({
                     type: "login",
-                    authority: authority
+                    config: config
                   });
                 }
               }

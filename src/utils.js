@@ -3,35 +3,8 @@ import * as schema from "./schema.json";
 const rs = require("jsrsasign");
 const base64url = require("base64-url");
 const ajv = new Ajv();
-function convertPayload(payload, authority) {
-  const iatDate = new Date(payload.iat * 1000).toLocaleDateString();
-  const expDate = new Date(payload.exp * 1000).toLocaleDateString();
-  const issuer = authority.authorities.find((x) => x.id === payload.iss);
-  const verifier = authority.authorities.find((x) => x.id === payload.aud);
-  const c = {
-    iatDate,
-    expDate,
-    issuer_code: issuer.id,
-    issuer_name: issuer.title,
-    verifier_code: verifier.id,
-    verifier_name: verifier.title,
-    sub: payload.sub,
-    cred_id: payload.cid,
-    cred_type: authority.titles["ct_" + payload.ct],
-    cred_year: payload.cy,
-    org_id: payload.oid
-  };
-  if (payload.on) {
-    c.org_name = payload.on;
-  }
-  if (payload.res) {
-    c.restrictions = payload.res;
-  }
 
-  return c;
-}
-
-export async function getCredential(cred, authority, revocations) {
+export async function getCredential(cred, config) {
   const arr = cred.split(".");
   const version = arr[0];
   if (version === "v1") {
@@ -44,14 +17,14 @@ export async function getCredential(cred, authority, revocations) {
       alert(JSON.stringify(validate.errors));
       return { isValid: false, errorCode: "invalid_cred" };
     }
-    if (!(payload.aud === authority.id || payload.iss === authority.id)) {
+    if (!(payload.aud === config.id || payload.iss === config.id)) {
       return { isValid: false, errorCode: "invalid_aud" };
     }
     const clockTimestamp = Math.floor(Date.now() / 1000);
     if (clockTimestamp >= payload.exp) {
       return { isValid: false, errorCode: "invalid_exp" };
     }
-    const issuer = authority.authorities.find((x) => x.id === payload.iss);
+    const issuer = config.authorities.find((x) => x.id === payload.iss);
     if (!issuer || Object.keys(issuer).length === 0) {
       return { isValid: false, errorCode: "iss_notfound" };
     }
@@ -64,13 +37,13 @@ export async function getCredential(cred, authority, revocations) {
     if (!isValid) {
       return { isValid: false, errorCode: "invalid_signature" };
     }
-    if (revocations.some((x) => x.cid === payload.cid)) {
+    /*if (revocations.some((x) => x.cid === payload.cid)) {
       return { isValid: false, errorCode: "revoked_cred" };
-    }
-    const convertedCred = convertPayload(payload, authority);
-    return { isValid: true, cred: convertedCred };
+    }*/
+    //const convertedCred = convertPayload(payload, authority);
+    return { isValid: true, cred: payload };
   }
-  throw Error("Version is not supported");
+  return { isValid: false, errorCode: "invalid_version" };
 }
 /*export async function getCredential(encodedCred, authority, revocations) {
   const cred = decodeCred(encodedCred);
@@ -136,6 +109,34 @@ export function decodeCred(credStr) {
     cred.payload.res = decoded[3];
   }
   return cred;
-}*/
+}
+function convertPayload(payload, authority) {
+  const iatDate = new Date(payload.iat * 1000).toLocaleDateString();
+  const expDate = new Date(payload.exp * 1000).toLocaleDateString();
+  //const issuer = authority.authorities.find((x) => x.id === payload.iss);
+  //const verifier = authority.authorities.find((x) => x.id === payload.aud);
+  const c = {
+    iatDate,
+    expDate,
+    issuer_code: issuer.id,
+    //issuer_name: issuer.name,
+    verifier_code: verifier.id,
+    //verifier_name: verifier.name,
+    sub: payload.sub,
+    cred_id: payload.cid,
+    cred_type: payload.ct,
+    cred_year: payload.cy,
+    org_id: payload.oid
+  };
+  if (payload.on) {
+    c.org_name = payload.on;
+  }
+  if (payload.res) {
+    c.restrictions = payload.res;
+  }
+
+  return c;
+}
+*/
 
 

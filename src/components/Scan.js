@@ -45,7 +45,6 @@ export default function Scan() {
   const classes = useStyles();
   const { state } = React.useContext(AppContext);
   const [pageState, setPageState] = useState({ page: "scan", data: "" });
-  //const [pageState, setPageState] = useState({ page: "result", data: "v1.eyJhbGciOiJFUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJ0ciIsImF1ZCI6InVhIiwiaWF0IjoiMTYwMDkwNTYwMCIsImV4cCI6IjE2MDg3NjgwMDAiLCJjaWQiOiIxMjM0NTY3ODkwIiwiY3QiOiIxIiwiY3kiOiIyMDIwIiwic3ViIjoiMDZCQjI1NDUiLCJvaWQiOiJBMTQyNTY4NzQyNjI0MjU1NSIsIm9uIjoiQUtBTkxBUiBVTFVTTEFSIEFSQVNJIFRBU0lNQUNJTElLIExJTUlURUQgU0lSS0VUSSJ9.KGfbd5i-AEmfTyKtLj4Bbw0gl9-82cC51QY-pIubUaiti3r6pzCLRJLNzrQX0va4fMfTtPEnACVq42iJnrcCAQ" });
   async function handleScan(data) {
     if (data) {
       setPageState({ page: "result", data: data });
@@ -61,7 +60,7 @@ export default function Scan() {
         {pageState.page === "result" ? (
           <ScanResult
             data={pageState.data}
-            authority={state.authority}
+            config={state.config}
             revocations={state.revocations}
           />
         ) : (
@@ -78,12 +77,12 @@ export default function Scan() {
           <IconButton edge="start" color="inherit" aria-label="open drawer">
             <img
               alt="Flag"
-              src={`https://www.countryflags.io/${state.authority.id}/flat/32.png`}
+              src={`https://www.countryflags.io/${state.config.id}/flat/32.png`}
             />
           </IconButton>
-          {state.authority.title}
+          {state.config.locale["authority_name_" + state.config.id]}
 
-          {Object.keys(state.authority).length !== 0 && (
+          {Object.keys(state.config).length !== 0 && (
             <Fab
               color="secondary"
               aria-label="add"

@@ -11,10 +11,9 @@ export default function ScanResult(props) {
       try {
         const result = await getCredential(
           props.data,
-          props.authority,
+          props.config,
           props.revocations
         );
-        console.log(result);
         setState(result);
       }
       catch (error) {
@@ -26,11 +25,11 @@ export default function ScanResult(props) {
   if (!state) {
     return <CircularProgress />;
   } else if (state.isValid) {
-    return <CredentialView cred={state.cred} authority={props.authority} />;
+    return <CredentialView cred={state.cred} locale={props.config.locale} />;
   }  else {
     return (
       <Alert severity="error">
-        {props.authority.titles.invalid_signature_message}
+        {props.config.locale[state.errorCode + "_message"]}
       </Alert>
     );
   }

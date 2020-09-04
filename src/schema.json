@@ -43,17 +43,17 @@
           "type": "string",
           "pattern": "^\\d{4}$"
         },
-        "oid": {
+        "comid": {
           "type": "string"
         },
-        "on": {
+        "comn": {
           "type": "string"
         },
         "res": {
           "type": "string"
         }
       },
-      "required": ["iss", "aud", "sub", "exp", "iat", "ct", "cid", "cy", "oid"]
+      "required": ["iss", "aud", "sub", "exp", "iat", "ct", "cid", "cy", "comid"]
     },
     "sig": {
       "type": "string"

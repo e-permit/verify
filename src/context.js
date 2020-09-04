@@ -1,10 +1,9 @@
 import React, { useEffect, useReducer, createContext } from "react";
 import { set, get } from "idb-keyval";
 const initialState = {
-  authority: {},
+  config: {},
   changes: [],
-  revocations: [],
-  credential: {} // error - view
+  revocations: []
 };
 
 function reducer(state, action) {
@@ -14,7 +13,7 @@ function reducer(state, action) {
     case "init":
       return { ...action.state };
     case "login":
-      return { ...state, authority: action.authority };
+      return { ...state, config: action.config };
     case "addChange":
       return { ...state, changes: action.change };
     case "removeChanges":
@@ -35,7 +34,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     async function fetchUser() {
       let persistedState = await get("state");
-      if (persistedState && Object.keys(persistedState.authority) !== 0) {
+      if (persistedState && Object.keys(persistedState.config) !== 0) {
         dispatch({ type: "reset", state: persistedState });
       }
     }

@@ -5,10 +5,9 @@ import Scan from "./components/Scan";
 
 function Page() {
   const { state } = React.useContext(AppContext);
-  console.log(state);
   return (
     <React.Fragment>
-      {Object.keys(state.authority).length === 0 ? (
+      {Object.keys(state.config).length === 0 ? (
         <SelectAuthority />
       ) : (
         <Scan />
