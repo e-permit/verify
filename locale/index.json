@@ -1,0 +1,14 @@
+{
+    "languages": [
+        {
+            "id": "trTR",
+            "name": "Turkish",
+            "flag_code": "tr"
+        },
+        {
+            "id": "enGB",
+            "name": "British English",
+            "flag_code": "gb"
+        }
+    ]
+}
