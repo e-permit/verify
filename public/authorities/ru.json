@@ -1,0 +1,40 @@
+{
+    "locale": {
+      "issuer_label": "This permit issued by",
+      "issuer_for_label": "This permit issued for",
+      "plate_number_label": "Plate number(s)",
+      "issued_at_label": "This permit prepared on",
+      "permit_type_label": "Type of the permit",
+      "permit_year_label": "Year of the permit",
+      "serial_number_label": "Serial Number of the permit",
+      "company_name_label": "Name of the company",
+      "invalid_signature_message": "Signature is not valid, check it out!",
+      "invalid_version_message": "Invalid version",
+      "invalid_cred_message": "Invalid credential payload",
+      "invalid_aud_message": "Invalid verifier",
+      "invalid_exp_message": "Credential expired",
+      "iss_notfound_message": "Issuer not found",
+      "jwk_notfound_message": "Issuer key not found",
+      "revoked_cred_message": "Revoked credential",
+      "valid_signature_message": "Signature is valid",
+      "permit_type_1_text": "Biliteral",
+      "permit_type_2_text": "Transit",
+      "permit_type_3_text": "3rd Country",
+      "authority_name_tr": "Republic Of Turkey",
+      "authority_name_uz": "Uzbekistan",
+      "authority_name_ua": "Ukraine",
+      "authority_name_ru": "Russia"
+    },
+    "authorities": [
+      {
+        "code": "tr",
+        "keys": [
+          {
+            "kid": "",
+            "valid_from": "",
+            "jwk": ""
+          }
+        ] 
+      }
+    ]
+  }

@@ -1,0 +1,20 @@
+{
+    "authorities": [
+        {
+            "code": "tr",
+            "uri": "/verify/authorities/tr.json"
+        },
+        {
+            "code": "uz",
+            "uri": "/verify/authorities/uz.json"
+        },
+        {
+            "code": "ua",
+            "uri": "/verify/authorities/ua.json"
+        },
+        {
+            "code": "ru",
+            "uri": "/verify/authorities/ru.json"
+        }
+    ]
+}

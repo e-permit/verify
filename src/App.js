@@ -1,26 +1,32 @@
-import React from "react";
-import { AppProvider, AppContext } from "./context";
-import SelectAuthority from "./components/SelectAuthority";
-import Scan from "./components/Scan";
+import React, { useEffect, useState } from "react";
+import { Alert } from "@material-ui/lab";
+import { CircularProgress } from "@material-ui/core";
+import PermitView from "./PermitView";
+import { validatePermit } from "./utils";
 
-function Page() {
-  const { state } = React.useContext(AppContext);
-  return (
-    <React.Fragment>
-      {Object.keys(state.config).length === 0 ? (
-        <SelectAuthority />
-      ) : (
-        <Scan />
-      )}
-    </React.Fragment>
-  );
-}
 function App() {
-  return (
-    <AppProvider>
-      <Page />
-    </AppProvider>
-  );
+  const [jwsResult, setJwsResult] = useState();
+  const [locale, setLocale] = useState();
+  async function verifyPermit() {
+    var url = window.location.pathname;
+    const jws = url.substring(url.lastIndexOf('/') + 1);
+    const res = await validatePermit(jws);  
+    setLocale(res.locale);
+    setJwsResult(res.result);
+  }
+  useEffect(() => verifyPermit(), []);
+
+  if (!jwsResult) {
+    return <CircularProgress />;
+  } else if (jwsResult.isValid) {
+    return <PermitView permit={jwsResult.permit} locale={locale} />;
+  } else {
+    return (
+      <Alert severity="error">
+        {locale[jwsResult.errorCode + "_message"]}
+      </Alert>
+    );
+  }
 }
 
 export default App;
