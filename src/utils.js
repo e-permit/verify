@@ -23,19 +23,19 @@ export async function validatePermit(jws) {
     const AUD_URI = authoritiesResult.authorities.find((x) => x.code === permit.issued_for).uri;
     const audRes = await fetch(AUD_URI);
     const authority = await audRes.json();
-    /*const issuer = authority.authorities.find((x) => x.code === permit.issuer);
+    const issuer = authority.authorities.find((x) => x.code === permit.issuer);
     if (!issuer || Object.keys(issuer).length === 0) {
         return { result: { isValid: false, errorCode: "iss_notfound" }, locale: authority.locale };
     }
-    const publicJwk = issuer.keys.find((x) => x.kid === header.kid);
-    if (!publicJwk || Object.keys(publicJwk).length === 0) {
+    const publicKey = issuer.keys.find((x) => x.kid === header.kid);
+    if (!publicKey || !publicKey.jwk) {
         return { result: { isValid: false, errorCode: "jwk_notfound" }, locale: authority.locale };
     }
-    const pubKey = rs.KEYUTIL.getKey(publicJwk);
+    const pubKey = rs.KEYUTIL.getKey(JSON.parse(publicKey.jwk));
     const isValid = rs.KJUR.jws.JWS.verify(jws, pubKey, [header.alg]);
     if (!isValid) {
         return { result: { isValid: false, errorCode: "invalid_signature" }, locale: authority.locale };
-    }*/
+    }
     
     return { result: { isValid: true, permit: permit }, locale: authority.locale };
 }

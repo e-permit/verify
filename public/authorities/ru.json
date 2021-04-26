@@ -1,7 +1,7 @@
 {
     "locale": {
       "issuer_label": "This permit issued by",
-      "issuer_for_label": "This permit issued for",
+      "issued_for_label": "This permit issued for",
       "plate_number_label": "Plate number(s)",
       "issued_at_label": "This permit prepared on",
       "permit_type_label": "Type of the permit",
@@ -27,12 +27,37 @@
     },
     "authorities": [
       {
+        "code": "ua",
+        "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"uWFoZ2J2BdSP-eCkqpNO2H4DoXeFNWEWrPiQ09hMJg8\",\"y\":\"FDqdZirvBlV_Au_4971Gd6d92_Z8abzSijr5a64vc9o\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }]
+      },
+      {
         "code": "tr",
         "keys": [
           {
-            "kid": "",
-            "valid_from": "",
-            "jwk": ""
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"b-twdhMdnpLQJ_pQx8meWsvevCyD0sufkdgF9nIsX-U\",\"y\":\"U339OypYc4efK_xKJqnGSgWbLQ--47sCfpu-pJU2620\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
+      },
+      {
+         "code": "uz",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"SWSJNOnsgtT1lRiR2MNlpj1duhKKOsxFKj7-l6WYSH0\",\"y\":\"23bHUMmZMqnzTC0CTyfE-uww7w-p8w8joVehSQ0SfRU\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
+      },
+      {
+         "code": "ru",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"m8u4tsFqyJZXVLslKp9GPhcMpvmI3uWW1nSWTOUk_l8\",\"y\":\"EpN5snwowsgUMoTeBMyahSTSdiFFlXXBIN9csqI17IA\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
           }
         ] 
       }

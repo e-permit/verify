@@ -1,7 +1,7 @@
 {
     "locale": {
       "issuer_label": "Belgeyi Veren Ülke",
-      "issuer_for_label": "Doğrulayan Ülke ",
+      "issued_for_label": "Doğrulayan Ülke ",
       "plate_number_label": "Plaka",
       "issued_at_label": "Düzenleme Tarihi",
       "permit_type_label": "Belge Tipi",
@@ -27,32 +27,39 @@
     },
     "authorities": [
       {
-        "code": "uz",
+        "code": "ua",
         "keys": [
           {
-            "kty": "EC",
-            "use": "sig",
             "kid": "1",
-            "crv": "P-256",
-            "x": "oPmyssan_NrAlsAEuFig2FdwJmWtnfsso2rfN3wclC8",
-            "y": "Sw5kgoB7fgQq7AYn7vRzOyG-g7___cp-4BHbzBQNCEU",
-            "alg": "ES256"
-          }
-        ]
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"uWFoZ2J2BdSP-eCkqpNO2H4DoXeFNWEWrPiQ09hMJg8\",\"y\":\"FDqdZirvBlV_Au_4971Gd6d92_Z8abzSijr5a64vc9o\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }]
       },
       {
         "code": "tr",
         "keys": [
           {
-            "kty": "EC",
-            "use": "sig",
             "kid": "1",
-            "crv": "P-256",
-            "x": "kKUBDGuy-smxA6omYlXBotSzPVB6qKI2jRe1x9U4_kE",
-            "y": "5q8JKBbFoiNuDDibs7h5zIohNvDiG70UJKq4E4n51Kg",
-            "alg": "ES256"
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"b-twdhMdnpLQJ_pQx8meWsvevCyD0sufkdgF9nIsX-U\",\"y\":\"U339OypYc4efK_xKJqnGSgWbLQ--47sCfpu-pJU2620\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
           }
-        ]
+        ] 
+      },
+      {
+         "code": "uz",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"SWSJNOnsgtT1lRiR2MNlpj1duhKKOsxFKj7-l6WYSH0\",\"y\":\"23bHUMmZMqnzTC0CTyfE-uww7w-p8w8joVehSQ0SfRU\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
+      },
+      {
+         "code": "ru",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"m8u4tsFqyJZXVLslKp9GPhcMpvmI3uWW1nSWTOUk_l8\",\"y\":\"EpN5snwowsgUMoTeBMyahSTSdiFFlXXBIN9csqI17IA\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
       }
     ]
   }
