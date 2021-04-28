@@ -8,8 +8,7 @@ function App() {
   const [jwsResult, setJwsResult] = useState();
   const [locale, setLocale] = useState();
   async function verifyPermit() {
-    var url = window.location.pathname;
-    const jws = url.substring(url.lastIndexOf('/') + 1);
+    const jws = window.location.hash.substring(1);
     const res = await validatePermit(jws);  
     setLocale(res.locale);
     setJwsResult(res.result);
