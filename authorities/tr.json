@@ -60,6 +60,24 @@
             "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"m8u4tsFqyJZXVLslKp9GPhcMpvmI3uWW1nSWTOUk_l8\",\"y\":\"EpN5snwowsgUMoTeBMyahSTSdiFFlXXBIN9csqI17IA\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
           }
         ] 
+      },
+      {
+         "code": "az",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"yRNYeBUtvP9G01wtErPFIm7AsMVGcEhIMEsG1ywWz8A\",\"y\":\"QHFf8_pRoHWjvhatQoqXajvRv_KRw4Mayf6EYWfITj4\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
+      },
+      {
+         "code": "md",
+         "keys": [
+          {
+            "kid": "1",
+            "jwk": "{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"U7lHPT94hvGjdu78b8ijccCQTMjjTHIcsWxxxBdgvCE\",\"y\":\"zGPkBKxRvjlB_aVneSUUo6lveSqhkZqBGUIQwzw5Od0\",\"use\":\"sig\",\"kid\":\"1\",\"alg\":\"ES256\"}"
+          }
+        ] 
       }
     ]
   }
