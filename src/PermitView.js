@@ -89,13 +89,20 @@ export default function CredentialView({ permit, locale }) {
                                         <Grid item>{locale["authority_name_" + permit.issued_for]}</Grid>
                                     </Grid>
                                 </div>
-                            }                        />
+                            } />
                     </ListItem>
                     <Divider component="li" />
                     <ListItem>
                         <ListItemText
                             primary={locale.issued_at_label}
-                            secondary={<div className={classes.root}>{new Date(permit.issued_at * 1000).toLocaleDateString()}</div>}
+                            secondary={<div className={classes.root}>{permit.issued_at}</div>}
+                        />
+                    </ListItem>
+                    <Divider component="li" />
+                    <ListItem>
+                        <ListItemText
+                            primary={locale.expire_at_label}
+                            secondary={<div className={classes.root}>{permit.expire_at}</div>}
                         />
                     </ListItem>
                     <Divider component="li" />

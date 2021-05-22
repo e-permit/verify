@@ -2,19 +2,19 @@ import React from 'react';
 import { SvgIcon } from '@material-ui/core';
 
 export default ({ code }) => {
-    if (code === "tr") {
+    if (code === "TR") {
         return <SvgIcon viewBox="0 0 8 12">
             <path fill="#E30A17" d="M0 0h12v8H0z" />
             <circle cx="4.25" cy="4" r="2" fill="#fff" />
             <circle cx="4.75" cy="4" r="1.6" fill="#e30a17" />
             <path fill="#fff" d="M5.83334 4l1.80901 .58779-1.11804-1.53885v1.90212l1.11804-1.53885z" />
         </SvgIcon>;
-    } else if (code === "ua") {
+    } else if (code === "UA") {
         return <SvgIcon viewBox="0 0 3 2">
             <path fill="#0057B7" d="M0 0h3v2H0z" />
             <path fill="gold" d="M0 1h3v1H0z" />
         </SvgIcon>;
-    } else if (code === "uz") {
+    } else if (code === "UZ") {
         return <SvgIcon viewBox="0 0 500 250">
             <path fill="#1eb53a" d="M0 0h500v250H0z" />
             <path fill="#0099b5" d="M0 0h500v125H0z" />
@@ -44,13 +44,13 @@ export default ({ code }) => {
                 <use xlinkHref="#d" x="-24" y="-24" />
             </g>
         </SvgIcon>;
-    } else if (code === "ru") {
+    } else if (code === "RU") {
         return <SvgIcon viewBox="0 0 9 6">
             <rect fill="#fff" width="9" height="3" />
             <rect fill="#d52b1e" y="3" width="9" height="3" />
             <rect fill="#0039a6" y="2" width="9" height="2" />
         </SvgIcon>;
-    } else if (code === "az") {
+    } else if (code === "AZ") {
         return <SvgIcon viewBox="0 0 1800 900">
             <path fill="#3f9c35" d="M0 0h1200v600H0z" />
             <path fill="#ed2939" d="M0 0h1200v400H0z" />
@@ -59,7 +59,7 @@ export default ({ code }) => {
             <circle cx="600" cy="300" r="75" fill="#ed2939" />
             <path d="M680 250l9.567 26.903 25.788-12.258-12.258 25.788L730 300l-26.903 9.567 12.258 25.788-25.788-12.258L680 350l-9.567-26.903-25.788 12.258 12.258-25.788L630 300l26.903-9.567-12.258-25.788 25.788 12.258L680 250z" fill="#fff" />
         </SvgIcon>;
-    } else if (code === "md") {
+    } else if (code === "MD") {
         return <SvgIcon viewBox="0 0 1200 600">
             <path fill="#C8102E" d="M0 0h1800v900H0z" />
             <path fill="#FFD100" d="M0 0h1200v900H0z" />

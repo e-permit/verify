@@ -14,8 +14,9 @@ export async function validatePermit(jws) {
         permit_type: claims[3],
         permit_id: claims[4],
         issued_at: claims[5],
-        plate_number: claims[6],
-        company_name: claims[7],
+        expire_at: claims[6],
+        plate_number: claims[7],
+        company_name: claims[8],
         serial_number: `${claims[0].toUpperCase()}-${claims[1].toUpperCase()}-${claims[2]}-${claims[3]}-${claims[4]}`
     }
     const res = await fetch(AUTHORITIES_URL);
