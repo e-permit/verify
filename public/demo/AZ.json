@@ -1,5 +1,5 @@
 {
-  "authorities": [
+  "trusted_authorities": [
     {
       "code": "TR",
       "keys": [

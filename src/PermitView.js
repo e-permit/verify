@@ -6,7 +6,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import Flags from "./Flags";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CredentialView({ permit, locale }) {
-    console.log(permit);
+    console.log(locale);
     const classes = useStyles();
     return (
         <main className={classes.layout}>
@@ -68,9 +67,9 @@ export default function CredentialView({ permit, locale }) {
                                 <div className={classes.root}>
                                     <Grid container alignItems="center" spacing={3}>
                                         <Grid item>
-                                            <Flags code={permit.issuer} />
+                                            <img src={`/verify/flags/${permit.issuer}.svg`}  width="40" height="25" />
                                         </Grid>
-                                        <Grid item>{locale["authority_name_" + permit.issuer]}</Grid>
+                                        <Grid item>{locale["authority_name_" + permit.issuer.toLowerCase()]}</Grid>
                                     </Grid>
                                 </div>
                             }
@@ -84,9 +83,9 @@ export default function CredentialView({ permit, locale }) {
                                 <div className={classes.root}>
                                     <Grid container alignItems="center" spacing={3}>
                                         <Grid item>
-                                            <Flags code={permit.issued_for} />
+                                            <img src={`/verify/flags/${permit.issued_for}.svg`}  width="40" height="25" />
                                         </Grid>
-                                        <Grid item>{locale["authority_name_" + permit.issued_for]}</Grid>
+                                        <Grid item>{locale["authority_name_" + permit.issued_for.toLowerCase()]}</Grid>
                                     </Grid>
                                 </div>
                             } />
@@ -108,29 +107,29 @@ export default function CredentialView({ permit, locale }) {
                     <Divider component="li" />
                     <ListItem>
                         <ListItemText
-                            primary={locale.plate_number_label}
-                            secondary={<div className={classes.root}>{permit.plate_number}</div>}
+                            primary={locale.permit_id_label}
+                            secondary={<div className={classes.root}>{permit.id}</div>}
                         />
                     </ListItem>
                     <Divider component="li" />
                     <ListItem>
                         <ListItemText
                             primary={locale.permit_type_label}
-                            secondary={<div className={classes.root}>{locale["permit_type_" + permit.permit_type + "_text"]}</div>}
+                            secondary={<div className={classes.root}>{locale["permit_type_" + permit.type + "_text"]}</div>}
                         />
                     </ListItem>
                     <Divider component="li" />
                     <ListItem>
                         <ListItemText
                             primary={locale.permit_year_label}
-                            secondary={<div className={classes.root}>{permit.permit_year}</div>}
+                            secondary={<div className={classes.root}>{permit.year}</div>}
                         />
                     </ListItem>
                     <Divider component="li" />
                     <ListItem>
                         <ListItemText
-                            primary={locale.serial_number_label}
-                            secondary={<div className={classes.root}>{permit.serial_number}</div>}
+                            primary={locale.plate_number_label}
+                            secondary={<div className={classes.root}>{permit.plate_number}</div>}
                         />
                     </ListItem>
                     <Divider component="li" />

@@ -12,7 +12,7 @@
     "@testing-library/react": "^9.5.0",
     "base64-url": "2.3.3",
     "cra-template": "^1.1.2",
-    "idb-keyval": "^5.0.5",
+    "avj": "^5.0.5",
     "jsrsasign": "^10.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

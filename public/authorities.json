@@ -2,33 +2,33 @@
     "authorities": [
         {
             "code": "TR",
-            "locale": "TR",
-            "demo-uri": "/verify/authorities/TR.json"
+            "locale": "tr",
+            "demo_uri": "/verify/demo/tr.json"
         },
         {
             "code": "UZ",
-            "locale": "EN",
-            "demo-uri": "/verify/authorities/UZ.json"
+            "locale": "en",
+            "demo_uri": "/verify/demo/uz.json"
         },
         {
             "code": "UA",
-            "locale": "EN",
-            "demo-uri": "/verify/authorities/UA.json"
+            "locale": "en",
+            "demo_uri": "/verify/demo/ua.json"
         },
         {
             "code": "RU",
-            "locale": "EN",
-            "demo-uri": "/verify/authorities/RU.json"
+            "locale": "en",
+            "demo_uri": "/verify/demo/ru.json"
         },
         {
             "code": "MD",
-            "locale": "EN",
-            "demo-uri": "/verify/authorities/MD.json"
+            "locale": "en",
+            "demo_uri": "/verify/demo/md.json"
         },
         {
             "code": "AZ",
-            "locale": "EN",
-            "demo-uri": "/verify/authorities/AZ.json"
+            "locale": "en",
+            "demo_uri": "/verify/demo/az.json"
         }
     ]
 }
