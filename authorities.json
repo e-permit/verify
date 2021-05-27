@@ -1,20 +1,34 @@
 {
     "authorities": [
         {
-            "code": "tr",
-            "uri": "/verify/authorities/tr.json"
+            "code": "TR",
+            "locale": "tr",
+            "demo_uri": "/verify/demo.json"
         },
         {
-            "code": "uz",
-            "uri": "/verify/authorities/uz.json"
+            "code": "UZ",
+            "locale": "en",
+            "demo_uri": "/verify/demo.json"
         },
         {
-            "code": "ua",
-            "uri": "/verify/authorities/ua.json"
+            "code": "UA",
+            "locale": "en",
+            "demo_uri": "/verify/demo.json"
         },
         {
-            "code": "ru",
-            "uri": "/verify/authorities/ru.json"
+            "code": "RU",
+            "locale": "en",
+            "demo_uri": "/verify/demo.json"
+        },
+        {
+            "code": "MD",
+            "locale": "en",
+            "demo_uri": "/verify/demo.json"
+        },
+        {
+            "code": "AZ",
+            "locale": "en",
+            "demo_uri": "/verify/demo.json"
         }
     ]
 }
