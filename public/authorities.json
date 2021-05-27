@@ -3,32 +3,32 @@
         {
             "code": "TR",
             "locale": "tr",
-            "demo_uri": "/verify/demo/tr.json"
+            "demo_uri": "/verify/demo.json"
         },
         {
             "code": "UZ",
             "locale": "en",
-            "demo_uri": "/verify/demo/uz.json"
+            "demo_uri": "/verify/demo.json"
         },
         {
             "code": "UA",
             "locale": "en",
-            "demo_uri": "/verify/demo/ua.json"
+            "demo_uri": "/verify/demo.json"
         },
         {
             "code": "RU",
             "locale": "en",
-            "demo_uri": "/verify/demo/ru.json"
+            "demo_uri": "/verify/demo.json"
         },
         {
             "code": "MD",
             "locale": "en",
-            "demo_uri": "/verify/demo/md.json"
+            "demo_uri": "/verify/demo.json"
         },
         {
             "code": "AZ",
             "locale": "en",
-            "demo_uri": "/verify/demo/az.json"
+            "demo_uri": "/verify/demo.json"
         }
     ]
 }
