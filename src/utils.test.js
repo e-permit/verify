@@ -34,8 +34,43 @@ describe("Utils", () => {
         expect(permit.year).toBe("2021");
     });
 
+    it("getPublicJwkTrue", () => {
+        const r = getPublicJwk({
+            trusted_authorities: [{
+                code: "UZ",
+                keys: [{
+                    x: "A",
+                    kid: "1"
+                }]
+            }]
+        }, "UZ", "1");
+        expect(r.ok).toBeTruthy();
+    });
+
+    it("getPublicJwkFalse", () => {
+        const r = getPublicJwk({
+            trusted_authorities: [{
+                code: "UZ",
+                keys: []
+            }]
+        }, "UZ", "1");
+        expect(r.ok).toBeFalsy();
+    });
+
+    it("getPublicJwkFalse", () => {
+        const r = getPublicJwk({
+            trusted_authorities: [{}]
+        }, "UZ", "1");
+        expect(r.ok).toBeFalsy();
+    });
+
+    it("parseQrCode", ()=>{
+        const{ok, version } = parseQrCode(exampleQrCode, {});
+        expect(ok).toBeTruthy();
+        expect(version).toBe("0");
+    });
     it("validatePermit", async () => {
-        fetch.mockResponseOnce(JSON.stringify({ data: '1' }));
+        fetch.mockResponseOnce(JSON.stringify({ }));
         fetch.mockResponseOnce(JSON.stringify({ authorities: [{ code: "TR", demo_uri: "http://demo_uri", uri: "http://uri" }] }));
         fetch.mockResponseOnce(JSON.stringify({
             trusted_authorities: [{
@@ -50,7 +85,7 @@ describe("Utils", () => {
                 }]
             }]
         }));
-        fetch.mockResponseOnce(JSON.stringify({ data: '1' }))
+        fetch.mockResponseOnce(JSON.stringify({ }))
         const r = await validatePermit(exampleQrCode);
         expect(r.ok).toBeTruthy();
     })

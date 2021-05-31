@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CredentialView({ permit, locale }) {
-    console.log(locale);
     const classes = useStyles();
     return (
         <main className={classes.layout}>
