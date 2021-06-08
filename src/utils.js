@@ -21,8 +21,11 @@ export async function validatePermit(qrCode) {
     const authoritiyUri = getUri(version, authorities, permit.issued_for);
     const authorityConfigRes = await fetch(authoritiyUri);
     const authorityConfig = await authorityConfigRes.json();
-    const publicJwk = getPublicJwk(authorityConfig, permit.issuer, header.kid);
-    const pubKey = rs.KEYUTIL.getKey(publicJwk.jwk);
+    const publicJwkResult = getPublicJwk(authorityConfig, permit.issuer, header.kid);
+    if(!publicJwkResult.ok){
+        return { ok: false, errorCode: "invalid_key" };
+    }
+    const pubKey = rs.KEYUTIL.getKey(publicJwkResult.jwk);
     const isValid = rs.KJUR.jws.JWS.verify(jws, pubKey, [header.alg]);
     if (!isValid) {
         return { ok: false, errorCode: "invalid_signature" };
