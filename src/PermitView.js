@@ -100,7 +100,7 @@ export default function CredentialView({ permit, locale, demo }) {
                                 <div className={classes.root}>
                                     <Grid container alignItems="center" spacing={3}>
                                         <Grid item>
-                                            <img src={`/verify/flags/${permit.issuer.toLowerCase()}.svg`} width="40" height="25"-  alt="issuer" />
+                                            <img src={`/verify/flags/${permit.issuer.toLowerCase()}.svg`} width="40" height="25" alt="issuer" />
                                         </Grid>
                                         <Grid item>{locale["authority_name_" + permit.issuer.toLowerCase()]}</Grid>
                                     </Grid>
