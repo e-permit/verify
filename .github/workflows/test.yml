@@ -1,5 +1,11 @@
 name: "test-on-pr"
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+permissions:
+  packages: write
 
 jobs:
   test-tauri:
