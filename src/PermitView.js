@@ -38,12 +38,46 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(3),
         },
     },
+    ribbon: {
+        backgroundColor: 'rgb(255, 244, 229)',
+        position: "absolute",
+        color: 'red',
+        width: 65,
+        zIndex: 3,
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        padding: 5,
+        font: 'Lato',
+        '&::before': {
+            position: "absolute",
+            zIndex: -1,
+            content: '',
+            display: 'block',
+            border: '5px solid #2980b9',
+        },
+        '&::after': {
+            position: "absolute",
+            zIndex: -1,
+            content: '',
+            display: 'block',
+            border: '5px solid #2980b9',
+        },
+        transform: 'rotate(-45deg)',
+        top: 60,
+        marginLeft: -10,
+    },
+    span: {
+
+    }
 }));
 
-export default function CredentialView({ permit, locale }) {
+export default function CredentialView({ permit, locale, demo }) {
     const classes = useStyles();
     return (
         <main className={classes.layout}>
+            {demo &&
+                <div className={classes.ribbon}><span className={classes.span}>DEMO !!</span>
+                </div>}
             <Paper className={classes.paper}>
                 <Typography component="h4" variant="h5" align="center">
                     E-PERMIT VERIFICATION
@@ -66,7 +100,7 @@ export default function CredentialView({ permit, locale }) {
                                 <div className={classes.root}>
                                     <Grid container alignItems="center" spacing={3}>
                                         <Grid item>
-                                            <img src={`/verify/flags/${permit.issuer.toLowerCase()}.svg`}  width="40" height="25" />
+                                            <img src={`/verify/flags/${permit.issuer.toLowerCase()}.svg`} width="40" height="25" alt="issuer" />
                                         </Grid>
                                         <Grid item>{locale["authority_name_" + permit.issuer.toLowerCase()]}</Grid>
                                     </Grid>
@@ -82,7 +116,7 @@ export default function CredentialView({ permit, locale }) {
                                 <div className={classes.root}>
                                     <Grid container alignItems="center" spacing={3}>
                                         <Grid item>
-                                            <img alt="" src={`/verify/flags/${permit.issued_for.toLowerCase()}.svg`}  width="40" height="25" />
+                                            <img src={`/verify/flags/${permit.issued_for.toLowerCase()}.svg`} width="40" height="25"  alt="issued for" />
                                         </Grid>
                                         <Grid item>{locale["authority_name_" + permit.issued_for.toLowerCase()]}</Grid>
                                     </Grid>

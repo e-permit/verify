@@ -7,6 +7,7 @@ import { validatePermit } from "./utils";
 function App() {
   const [permit, setPermit] = useState();
   const [loading, setLoading] = useState(true);
+  const [demo, setDemo] = useState(false);
   const [error, setError] = useState();
   const [locale, setLocale] = useState();
   async function verifyPermit() {
@@ -16,6 +17,7 @@ function App() {
       if(res.ok){
         setLocale(res.locale);
         setPermit(res.permit);
+        setDemo(res.demo);
       }else{
         setError(res.errorCode);
       }
@@ -31,7 +33,7 @@ function App() {
   if (loading) {
     return <CircularProgress />;
   } else if (permit) {
-    return <PermitView permit={permit} locale={locale} />;
+    return <PermitView permit={permit} locale={locale} demo={demo} />;
   } else {
     return (
       <Alert severity="error">

@@ -34,7 +34,7 @@ export async function validatePermit(qrCode) {
     const localeR = await fetch(`/verify/locale/${locale}.json`);
     const localeContent = await localeR.json();
 
-    return { ok: true, permit: permit, locale: localeContent };
+    return { ok: true, permit: permit, locale: localeContent, demo: version === "0" };
 }
 
 export function parseQrCode(qrCode, schema) {
