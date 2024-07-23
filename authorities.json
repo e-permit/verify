@@ -1,34 +1,11 @@
 {
-    "authorities": [
-        {
-            "code": "TR",
-            "locale": "tr",
-            "demo_uri": "/verify/demo.json"
-        },
-        {
-            "code": "UZ",
-            "locale": "en",
-            "demo_uri": "/verify/demo.json"
-        },
-        {
-            "code": "UA",
-            "locale": "en",
-            "demo_uri": "/verify/demo.json"
-        },
-        {
-            "code": "RU",
-            "locale": "en",
-            "demo_uri": "/verify/demo.json"
-        },
-        {
-            "code": "MD",
-            "locale": "en",
-            "demo_uri": "/verify/demo.json"
-        },
-        {
-            "code": "AZ",
-            "locale": "en",
-            "demo_uri": "/verify/demo.json"
-        }
-    ]
+    "TR": {
+        "name": "Türkiye",
+        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+    },
+    "TM": {
+         "name": "Türkmenistan",
+        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+    }
+
 }
