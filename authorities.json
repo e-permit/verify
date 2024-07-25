@@ -1,11 +1,14 @@
 {
     "TR": {
         "name": "Türkiye",
-        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit",
+        "prod-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
     },
     "TM": {
          "name": "Türkmenistan",
-        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit",
+        "prod-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+
     }
 
 }
