@@ -1,1 +1,25 @@
-if(!self.define){let e,s={};const i=(i,n)=>(i=new URL(i+".js",n).href,s[i]||new Promise((s=>{if("document"in self){const e=document.createElement("script");e.src=i,e.onload=s,document.head.appendChild(e)}else e=i,importScripts(i),s()})).then((()=>{let e=s[i];if(!e)throw new Error(`Module ${i} didn’t register its module`);return e})));self.define=(n,r)=>{const t=e||("document"in self?document.currentScript.src:"")||location.href;if(s[t])return;let c={};const o=e=>i(e,t),a={module:{uri:t},exports:c,require:o};s[t]=Promise.all(n.map((e=>a[e]||o(e)))).then((e=>(r(...e),c)))}}define(["./workbox-5b1b5b15"],(function(e){"use strict";self.addEventListener("message",(e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()})),e.precacheAndRoute([{url:"assets/index-BuTbID_X.js",revision:null},{url:"assets/index-Bwy0Peb7.css",revision:null},{url:"index.html",revision:"cd993f89a3dc6b2be983837637efd8e7"},{url:"registerSW.js",revision:"edc340a2f5694a07f94a289c0a2b0fa2"},{url:"favicon.svg",revision:"71dcfd191507c31dc79efe3341dfa3b9"},{url:"p-192x192.png",revision:"493e98637e3eaee9c7e45a1b68c08967"},{url:"p-512x512.png",revision:"d041b3a9381511c758cc92092eb89b66"},{url:"manifest.webmanifest",revision:"cac24c68ad360cc1a1224260a088e406"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html"))),e.registerRoute(/^https:\/\/disapi\.uab\.gov\.tr\/apigateway\/test\/e-permit\.*/i,new e.CacheFirst({cacheName:"verify",plugins:[new e.ExpirationPlugin({maxEntries:50,maxAgeSeconds:86400}),new e.CacheableResponsePlugin({statuses:[0,200]})]}),"GET")}));
+
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+});
+self.addEventListener('activate', (e) => {
+  self.registration.unregister()
+    .then(() => self.clients.matchAll())
+    .then((clients) => {
+      clients.forEach((client) => {
+        if (client instanceof WindowClient)
+          client.navigate(client.url);
+      });
+      return Promise.resolve();
+    })
+    .then(() => {
+      self.caches.keys().then((cacheNames) => {
+        Promise.all(
+          cacheNames.map((cacheName) => {
+            return self.caches.delete(cacheName);
+          }),
+        );
+      })
+    });
+});
+    
