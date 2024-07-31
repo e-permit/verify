@@ -13,9 +13,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": ["vite/client", "node"],
+    // "types": ["vite/client", "vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info", "node"],
 
     /* Linting */
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true

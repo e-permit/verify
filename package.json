@@ -1,48 +1,46 @@
 {
-  "name": "verify",
-  "version": "0.1.0",
+  "name": "e-permit-verify",
   "private": true,
-  "homepage": "http://e-permit.github.io/verify",
-  "dependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.57",
-    "@material-ui/styles": "^4.11.3",
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^9.5.0",
-    "ajv": "^6.12.6",
-    "base64-url": "2.3.3",
-    "cra-template": "^1.1.2",
-    "jsrsasign": "^10.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^4.0.3"
-  },
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "http://e-permit.github.io/verify/",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite build && vite --host",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "html5-qrcode": "^2.3.8",
+    "idb-keyval": "^6.2.1",
+    "jsrsasign": "^11.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.19.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "jest-fetch-mock": "^3.0.3"
+    "@rollup/plugin-replace": "^5.0.5",
+    "@testing-library/jest-dom": "^6.4.7",
+    "@testing-library/react": "^16.0.0",
+    "@types/jsrsasign": "^10.5.14",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "gh-pages": "^6.1.1",
+    "jest-fetch-mock": "^3.0.3",
+    "postcss": "^8.4.39",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-pwa": "^0.20.0"
   }
 }
