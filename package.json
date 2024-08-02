@@ -13,6 +13,9 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.2",
+    "@tsparticles/engine": "^3.5.0",
+    "@tsparticles/react": "^3.0.0",
     "@yudiel/react-qr-scanner": "^2.0.4",
     "ajv": "^8.17.1",
     "clsx": "^2.1.1",
@@ -48,7 +51,6 @@
     "vite-plugin-pwa": "^0.20.0",
     "workbox-core": "^7.1.0"
   },
-  
   "overrides": {
     "sharp": "0.32.6",
     "sharp-ico": "0.1.5"

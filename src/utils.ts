@@ -21,37 +21,39 @@ export async function verifyPermit(qrCode: string) {
   const config = await configRes.json();
   const issuer = authorities[permitData.issuer];
   let permit = undefined;
+  let offline = false;
   try {
     const permitRes = await fetch(`${getUri(issuer)}/verify/${qrCode}`);
-
+    console.log(permitRes);
     if (permitRes.ok) {
       permit = await permitRes.json();
     } else {
+      throw Error("burası patlıyor.");
     }
   } catch {
-
-    //!offline
-    permit = permitData;
+    (offline = true), (permit = permitData);
     const publicJwkResult = await getPublicJwk(getUri(issuer), header.kid);
     if (!publicJwkResult.ok) {
       return { ok: false, errorCode: "invalid_key" };
     }
     const pubKey = rs.KEYUTIL.getKey(publicJwkResult.jwk);
     try {
-      const isValid = rs.KJUR.jws.JWS.verify(jws, pubKey as rs.RSAKey,[header.alg]);
+      const isValid = rs.KJUR.jws.JWS.verify(jws, pubKey as rs.RSAKey, [
+        header.alg,
+      ]);
       if (!isValid) {
         return { ok: false, errorCode: "invalid_signature" };
       }
     } catch (err) {
-      console.error("verification error:",err);
+      console.error("verification error:", err);
     }
   }
 
-  permit.issuer = issuer.name;
-  permit.issued_for = authorities[permitData.issued_for].name;
-  permit.permit_type = config["permit-types"][permit.permit_type.toString()];
+  permit.issuer_name = issuer.name;
+  permit.issued_for_name = authorities[permitData.issued_for].name;
+  permit.permit_type_name = config["permit-types"][permit.permit_type.toString()];
 
-  return { ok: true, permit };
+  return { ok: true, offline, permit };
 }
 
 export function parseQrCode(qrCode: string, schema: any) {
@@ -68,7 +70,7 @@ export function parseQrCode(qrCode: string, schema: any) {
   });
 
   if (!valid) {
-    console.error("Validation error",validate.errors);
+    console.error("Validation error", validate.errors);
     return { ok: false };
   }
   return {

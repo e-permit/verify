@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-
       registerType: "prompt",
       injectRegister: false,
       includeAssets: ["**/*.{js,css,html,svg,png,ico}"],
@@ -17,7 +16,6 @@ export default defineConfig({
         short_name: "e-permit-verify",
         description: "e-permit-verify",
         theme_color: "#ffffff",
-
         icons: [
           {
             src: "p-192x192.png",
