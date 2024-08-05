@@ -1,10 +1,6 @@
 {
     "type": "object",
     "properties": {
-        "version":{
-            "type": "string",
-            "enum": ["0", "1"]
-        },
         "header": {
             "type": "object",
             "properties": {
@@ -54,8 +50,12 @@
             ]
         },
         "sig": {
-          "type": "string"
+            "type": "string"
         }
     },
-    "required": ["version", "header", "payload", "sig"]
+    "required": [
+        "header",
+        "payload",
+        "sig"
+    ]
 }

@@ -1,25 +1,28 @@
 {
-  "short_name": "Verifier App",
-  "name": "e-Permit Verifier App",
+  "name": "E-Permit Verification",
+  "short_name": "E-Permit",
+  "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "p-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "favicon.svg",
+      "sizes": "192x192",
+      "type": "image/svg"
     },
     {
-      "src": "logo512.png",
+      "src": "p-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "p-512x512.png", 
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "any maskable"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }

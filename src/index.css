@@ -1,0 +1,115 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+
+
+video {
+    object-fit: cover !important;
+    /* height: 100% !important;
+    aspect-ratio: 4 / 1 !important; */
+}
+
+
+svg[style*="top: 0px; left: 0px; z-index: 1; box-sizing: border-box; border: 35px solid rgba(0, 0, 0, 0.2);"] {
+    width: 100% !important;
+    height: 100% !important;
+    border: 30px solid white !important;
+    box-sizing: content-box;
+    display: none;
+}
+
+div[style*="position:relative;"] {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+div:has(> svg):not([style*="padding-left:"]) {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+div[style*="position: relative;"] {
+    position: relative;
+}
+
+div[style*="position: relative;"]::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    left: 35px;
+    width: 25%;
+    height: auto;
+    border-top: 0.5rem solid rgba(30, 30, 30, 0.5);
+    border-left: 0.5rem solid rgba(30, 30, 30, 0.5);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+div[style*="position: relative;"]::after {
+    content: "";
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    right: 35px;
+    width: 25%;
+    height: auto;
+    border-top: 0.5rem solid rgba(30, 30, 30, 0.5);
+    border-right: 0.5rem solid rgba(30, 30, 30, 0.5);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+div[style*="position: relative;"]::before,
+div[style*="position: relative;"]::after,
+div[style*="position: relative;"]::before,
+div[style*="position: relative;"]::after {
+    pointer-events: none;
+}
+
+div[style*="position: relative;"]::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    left: 35px;
+    width: 25%;
+    height: auto;
+    border-bottom: 0.5rem solid rgba(30, 30, 30, 0.5);
+    border-left: 0.5rem solid rgba(30, 30, 30, 0.5);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+div[style*="position: relative;"]::after {
+    content: "";
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    right: 35px;
+    width: 25%;
+    height: auto;
+    border-bottom: 0.5rem solid rgba(30, 30, 30, 0.5);
+    border-right: 6px solid rgba(30, 30, 30, 0.5);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+
+.landing-title {
+    background: #00808070;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12.9px);
+    -webkit-backdrop-filter: blur(12.9px);
+    border: 0px 1px solid rgba(83, 255, 193, 0.03);
+
+    text-align: center;
+    vertical-align: middle;
+    padding: 0 !important;
+    font-size: 2.5rem;
+    color: snow;
+}
