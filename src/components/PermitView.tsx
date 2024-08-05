@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { verifyPermit } from "../utils";
 import PermitDetails from "./PermitDetails";
+import Alert from "./Alert";
 
 export default function PermitView() {
   const { qrCode } = useParams();
@@ -26,6 +27,8 @@ export default function PermitView() {
       return <>Invalid Key </>;
     } else if (result.errorCode === "invalid_signature") {
       return <>Invalid Signature...</>;
+    } else if (result.errorCode === "permit_not_found") {
+      return <Alert title="Permit not found"/>;
     } else {
       return <>Unknown Error
       <br />

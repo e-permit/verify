@@ -28,7 +28,7 @@ export async function verifyPermit(qrCode: string) {
     if (permitRes.ok) {
       permit = await permitRes.json();
     } else {
-      throw Error("burası patlıyor.");
+      return { ok: false, errorCode: "permit_not_found" };
     }
   } catch {
     (offline = true), (permit = permitData);
