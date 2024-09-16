@@ -7,11 +7,13 @@ export async function verifyPermit(qrCode: string) {
   const schemaRes = await fetch("/verify/schema.json");
   const schema = await schemaRes.json();
   const parseQrCodeResult = parseQrCode(qrCode, schema);
+
   if (!parseQrCodeResult.ok) {
     return { ok: false, errorCode: "invalid_format" };
   }
 
   const { header, payload, jws } = parseQrCodeResult;
+
 
   const permitData = getPermit(payload);
 
@@ -24,7 +26,7 @@ export async function verifyPermit(qrCode: string) {
   let offline = false;
   try {
     const permitRes = await fetch(`${getUri(issuer)}/verify/${qrCode}`);
-    console.log(permitRes);
+ 
     if (permitRes.ok) {
       permit = await permitRes.json();
     } else {
@@ -48,7 +50,7 @@ export async function verifyPermit(qrCode: string) {
       console.error("verification error:", err);
     }
   }
-
+  console.log(permit);
   permit.issuer_name = issuer.name;
   permit.issued_for_name = authorities[permitData.issued_for].name;
   permit.permit_type_name = config["permit-types"][permit.permit_type.toString()];

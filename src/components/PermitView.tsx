@@ -10,6 +10,7 @@ export default function PermitView() {
   useEffect(() => {
     const verify = async () => {
       const data = await verifyPermit(qrCode!);
+      console.log("data", data)
       setResult(data);
     };
 
@@ -24,11 +25,11 @@ export default function PermitView() {
     if (result.ok) {
       return <PermitDetails permit={result.permit} offline={result.offline}/>;
     } else if (result.errorCode === "invalid_key") {
-      return <>Invalid Key </>;
+      return <Alert title="INVALID KEY"/>;
     } else if (result.errorCode === "invalid_signature") {
-      return <>Invalid Signature...</>;
+      return <Alert title="INVALID SIGNATURE"/>;
     } else if (result.errorCode === "permit_not_found") {
-      return <Alert title="Permit not found"/>;
+      return <Alert title="PERMIT NOT FOUND"/>;
     } else {
       return <>Unknown Error
       <br />

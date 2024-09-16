@@ -5,8 +5,13 @@
         "prod-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
     },
     "TM": {
-        "name": "Türkmenistan",
-        "test-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit",
-        "prod-url": "https://disapi.uab.gov.tr/apigateway/test/e-permit"
+        "name": "Turkmenistan",
+        "test-url": "",
+        "prod-url": ""
+    },
+    "AZ": {
+        "name": "Azerbaijan",
+        "test-url": "",
+        "prod-url": ""
     }
 }
