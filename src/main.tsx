@@ -5,17 +5,18 @@ import PermitView from "./components/PermitView.tsx";
 import Nav from "./components/Nav.tsx";
 import Scanner from "./components/ScannerView.tsx";
 import PWABadge from "./components/PWABadge.tsx";
-import { getUri } from "./utils.ts";
 import HomeView from "./components/HomeView.tsx";
 
 const sendStartupRequest = async () => {
   try {
-    const authoritiesRes = await fetch("/verify/authorities.json");
+    const authoritiesRes = await fetch("https://e-permit.github.io/data/authorities.json");
     const authorities = await authoritiesRes.json();
     console.log("Startup data:", authorities);
     for (const [key] of Object.entries(authorities)) {
-      const res = await fetch(getUri(authorities[key]));
-      await res.json();
+      if(authorities[key].url){
+        const res = await fetch(authorities[key].url);
+        await res.json();
+      }
     }
   } catch (error) {
     console.error("Failed to fetch startup data:", error);

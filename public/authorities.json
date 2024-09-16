@@ -8,10 +8,5 @@
         "name": "Turkmenistan",
         "test-url": "",
         "prod-url": ""
-    },
-    "AZ": {
-        "name": "Azerbaijan",
-        "test-url": "",
-        "prod-url": ""
     }
 }
