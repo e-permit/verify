@@ -31,9 +31,7 @@ export default function PermitView() {
     } else if (result.errorCode === "permit_not_found") {
       return <Alert title="PERMIT NOT FOUND"/>;
     } else {
-      return <>Unknown Error
-      <br />
-      result: {JSON.stringify(result)}</>;
+      return <Alert title="UNKNOWN ERROR"/>;
     }
   }
 }
