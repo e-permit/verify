@@ -139,10 +139,10 @@ export default function PermitDetails({
           {permit.departure_company && (
             <div className="bg-white p-2 sm:grid sm:grid-cols-3 sm:gap-2 sm:px-3">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Departure Company
+                Departure Country
               </dt>
               <dd className="text-sm leading-3 text-gray-700 sm:col-span-2 sm:mt-0">
-                {permit.departure_company}
+                {permit.departure_country_name}
               </dd>
             </div>
           )}
@@ -152,7 +152,7 @@ export default function PermitDetails({
                 Arrival Country
               </dt>
               <dd className="text-sm leading-3 text-gray-700 sm:col-span-2 sm:mt-0">
-                {permit.arrival_country}
+                {permit.arrival_country_name}
               </dd>
             </div>
           )}

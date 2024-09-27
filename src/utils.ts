@@ -17,7 +17,7 @@ export async function verifyPermit(qrCode: string) {
   const { header, payload, jws } = parseQrCodeResult;
 
 
-  const permitData = getPermit(payload);
+  const permitData : any = getPermit(payload);
   const authoritiesRes = await fetch(`${BASE_URL}/authorities.json`);
   const authorities = await authoritiesRes.json();
   const permitTypesRes = await fetch(`${BASE_URL}/permit-types.json`);
@@ -54,6 +54,8 @@ export async function verifyPermit(qrCode: string) {
   }
   permit.issuer_name = issuer.name;
   permit.issued_for_name = authorities[permitData.issued_for].name;
+  permit.departure_country_name = authorities[permitData.departure_country].name;
+  permit.arrival_country_name = authorities[permitData.arrival_country].name;
   permit.permit_type_name = permitTypes.find(t => t.code === permit.permit_type).name;
 
   return { ok: true, offline, permit };
