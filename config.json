@@ -1,8 +1,0 @@
-{
-  "permit-types": 
-    {
-      "1": "BILATERAL",
-      "2": "TRANSIT",
-      "3": "THIRD COUNTRY"
-    }
-}
