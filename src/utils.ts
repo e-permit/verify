@@ -31,6 +31,8 @@ export async function verifyPermit(qrCode: string) {
     const permitRes = await fetch(`${issuer.url}/verify/${qrCode}`);
     if (permitRes.ok) {
       permit = await permitRes.json();
+      permit.departure_country_name = authorities[permit.departure_country].name;
+      permit.arrival_country_name = authorities[permit.arrival_country].name;
     } else {
       return { ok: false, errorCode: "permit_not_found" };
     }
@@ -54,8 +56,6 @@ export async function verifyPermit(qrCode: string) {
   }
   permit.issuer_name = issuer.name;
   permit.issued_for_name = authorities[permitData.issued_for].name;
-  permit.departure_country_name = authorities[permitData.departure_country].name;
-  permit.arrival_country_name = authorities[permitData.arrival_country].name;
   permit.permit_type_name = permitTypes.find(t => t.code === permit.permit_type).name;
 
   return { ok: true, offline, permit };
