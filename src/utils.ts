@@ -3,28 +3,32 @@ import rs from "jsrsasign";
 
 const ajv = new Ajv();
 
+const BASE_URL = "https://e-permit.github.io/data";
+
 export async function verifyPermit(qrCode: string) {
-  const schemaRes = await fetch("/verify/schema.json");
+  const schemaRes = await fetch(`${BASE_URL}/permit-schema.json`);
   const schema = await schemaRes.json();
   const parseQrCodeResult = parseQrCode(qrCode, schema);
+
   if (!parseQrCodeResult.ok) {
     return { ok: false, errorCode: "invalid_format" };
   }
 
   const { header, payload, jws } = parseQrCodeResult;
 
-  const permitData = getPermit(payload);
 
-  const authoritiesRes = await fetch("/verify/authorities.json");
+  const permitData = getPermit(payload);
+  const authoritiesRes = await fetch(`${BASE_URL}/authorities.json`);
   const authorities = await authoritiesRes.json();
-  const configRes = await fetch("/verify/config.json");
-  const config = await configRes.json();
+  const permitTypesRes = await fetch(`${BASE_URL}/permit-types.json`);
+  const permitTypes = await permitTypesRes.json();
   const issuer = authorities[permitData.issuer];
+
+
   let permit = undefined;
   let offline = false;
   try {
-    const permitRes = await fetch(`${getUri(issuer)}/verify/${qrCode}`);
-    console.log(permitRes);
+    const permitRes = await fetch(`${issuer.url}/verify/${qrCode}`);
     if (permitRes.ok) {
       permit = await permitRes.json();
     } else {
@@ -32,7 +36,7 @@ export async function verifyPermit(qrCode: string) {
     }
   } catch {
     (offline = true), (permit = permitData);
-    const publicJwkResult = await getPublicJwk(getUri(issuer), header.kid);
+    const publicJwkResult = await getPublicJwk(issuer.url, header.kid);
     if (!publicJwkResult.ok) {
       return { ok: false, errorCode: "invalid_key" };
     }
@@ -48,10 +52,9 @@ export async function verifyPermit(qrCode: string) {
       console.error("verification error:", err);
     }
   }
-
   permit.issuer_name = issuer.name;
   permit.issued_for_name = authorities[permitData.issued_for].name;
-  permit.permit_type_name = config["permit-types"][permit.permit_type.toString()];
+  permit.permit_type_name = permitTypes.find(t => t.code === permit.permit_type).name;
 
   return { ok: true, offline, permit };
 }
@@ -105,12 +108,6 @@ export function getPermit(payload: any) {
     company_name: payload.cn,
   };
   return permit;
-}
-
-export function getUri(authority: any) {
-  return process.env.NODE_ENV === "development"
-    ? authority["test-url"]
-    : authority["prod-url"];
 }
 
 function base64url_decode(value: string): string {
