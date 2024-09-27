@@ -136,7 +136,7 @@ export default function PermitDetails({
               </dd>
             </div>
           )}
-          {permit.departure_company && (
+          {permit.departure_country && (
             <div className="bg-white p-2 sm:grid sm:grid-cols-3 sm:gap-2 sm:px-3">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Departure Country
