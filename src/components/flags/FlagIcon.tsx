@@ -1,4 +1,5 @@
 import FlagIconEn from "./FlagIconEn";
+import FlagIconGe from "./FlagIconGe";
 import FlagIconRu from "./FlagIconRu";
 import FlagIconTm from "./FlagIconTm";
 import FlagIconTr from "./FlagIconTr";
@@ -17,7 +18,9 @@ export default function FlagIcon({ code }: Props) {
     case "uz":
       return <FlagIconUz />;
     case "tm":
-        return <FlagIconTm />;
+      return <FlagIconTm />;
+    case "ge":
+      return <FlagIconGe />;
     default:
       return <></>;
   }
